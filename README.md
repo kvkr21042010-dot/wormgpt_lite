@@ -38,3 +38,5 @@ git clone https://github.com/kvkr21042010-dot/wormgpt_lite.git
 cd wormgpt_lite
 bash requirements.sh
 bash wormgpt_lite.sh
+
+#add your api key from ai studios after running requirements.sh
