@@ -34,3 +34,7 @@ See `requirements.md` for full installation guide.
 ```bash
 pkg update && pkg upgrade
 pkg install curl jq git
+git clone https://github.com/kvkr21042010-dot/wormgpt_lite.git
+cd wormgpt_lite
+bash requirements.sh
+bash wormgpt_lite.sh
