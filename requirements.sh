@@ -1,8 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# ===============================
+# ===================================
 # wormgpt_lite Requirements Installer
-# ===============================
+# ===================================
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -12,18 +12,14 @@ NC='\033[0m'
 
 clear
 
-# ===============================
-# BANNER
-# ===============================
-
 echo -e "${CYAN}"
 cat << "EOF"
 ██╗    ██╗ ██████╗ ██████╗ ███╗   ███╗ ██████╗ ██████╗ ████████╗
 ██║    ██║██╔═══██╗██╔══██╗████╗ ████║██╔════╝ ██╔══██╗╚══██╔══╝
-██║ █╗ ██║██║   ██║██████╔╝██╔████╔██║██║  ███╗██████╔╝   ██║   
-██║███╗██║██║   ██║██╔══██╗██║╚██╔╝██║██║   ██║██╔═══╝    ██║   
-╚███╔███╔╝╚██████╔╝██║  ██║██║ ╚═╝ ██║╚██████╔╝██║        ██║   
- ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝        ╚═╝   
+██║ █╗ ██║██║   ██║██████╔╝██╔████╔██║██║  ███╗██████╔╝   ██║
+██║███╗██║██║   ██║██╔══██╗██║╚██╔╝██║██║   ██║██╔═══╝    ██║
+╚███╔███╔╝╚██████╔╝██║  ██║██║ ╚═╝ ██║╚██████╔╝██║        ██║
+ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝        ╚═╝
 
         wormgpt_lite v1.0
         Requirements Installer
@@ -32,34 +28,38 @@ echo -e "${NC}"
 
 echo -e "${CYAN}======================================${NC}"
 
-# ===============================
+# ===================================
 # TERMUX CHECK
-# ===============================
+# ===================================
 
 if [[ -z "$PREFIX" ]]; then
-    echo -e "${RED}This installer is designed for Termux only.${NC}"
+    echo -e "${RED}Error: This installer is designed for Termux only.${NC}"
     exit 1
 fi
 
-# ===============================
-# INSTALLATION PROCESS
-# ===============================
+# ===================================
+# UPDATE SYSTEM
+# ===================================
 
-echo -e "${YELLOW}Updating packages...${NC}"
-pkg update -y && pkg upgrade -y
+echo -e "${YELLOW}Updating package lists...${NC}"
+pkg update -y || apt update -y
+
+# ===================================
+# REQUIRED PACKAGES
+# ===================================
 
 REQUIRED_PKGS=(curl jq git coreutils)
 
-for pkg in "${REQUIRED_PKGS[@]}"; do
-    if ! command -v $pkg &> /dev/null; then
-        echo -e "${YELLOW}Installing $pkg...${NC}"
-        pkg install -y $pkg
+for package in "${REQUIRED_PKGS[@]}"; do
+    if ! command -v "$package" >/dev/null 2>&1; then
+        echo -e "${YELLOW}Installing $package...${NC}"
+        pkg install -y "$package" || apt install -y "$package"
     else
-        echo -e "${GREEN}$pkg already installed ✔${NC}"
+        echo -e "${GREEN}$package already installed ✔${NC}"
     fi
 done
 
 echo -e "${CYAN}======================================${NC}"
-echo -e "${GREEN}All requirements installed successfully!${NC}"
-echo -e "${CYAN}Run your AI using:${NC} ${GREEN}./wormgpt_lite.sh${NC}"
+echo -e "${GREEN}All requirements installed successfully! ✔${NC}"
+echo -e "${CYAN}Now run:${NC} ${GREEN}chmod +x wormgpt_lite.sh && ./wormgpt_lite.sh${NC}"
 echo -e "${CYAN}======================================${NC}"
