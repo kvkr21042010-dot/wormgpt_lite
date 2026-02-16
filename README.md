@@ -38,8 +38,8 @@ git clone https://github.com/kvkr21042010-dot/wormgpt_lite.git
 cd wormgpt_lite
 bash requirements.sh
 bash wormgpt_lite.sh
----
-
+```
+   
 ## 🔑 API Requirement
 
 This project requires a Google AI Studio (Gemini) API key.
@@ -52,6 +52,7 @@ This project requires a Google AI Studio (Gemini) API key.
 4. Copy the generated key
 
 ### Set API Key in Termux:
+(use this command )
 
 export GEMINI_API_KEY="your_api_key_here"
 
